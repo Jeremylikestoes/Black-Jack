@@ -22,16 +22,16 @@ public class Deck {
             String objectSuit;
             switch (i) {
                 case 1:
-                    objectSuit = "clubs_";
+                    objectSuit = "_clubs";
                     break;
                 case 2:
-                    objectSuit = "spades_";
+                    objectSuit = "_spades";
                     break;
                 case 3:
-                    objectSuit = "hearts_";
+                    objectSuit = "_hearts";
                     break;
                 case 4:
-                    objectSuit = "diamonds_";
+                    objectSuit = "_diamonds";
                     break;
                 default:
                     objectSuit = "error";
@@ -42,49 +42,49 @@ public class Deck {
                 String objectValue;
                 switch (j) {
                     case 1:
-                        objectValue = "Ace";
+                        objectValue = "ace";
                         break;
                     case 2:
-                        objectValue = "Two";
+                        objectValue = "two";
                         break;
                     case 3:
-                        objectValue = "Three";
+                        objectValue = "three";
                         break;
                     case 4:
-                        objectValue = "Four";
+                        objectValue = "four";
                         break;
                     case 5:
-                        objectValue = "Five";
+                        objectValue = "five";
                         break;
                     case 6:
-                        objectValue = "Six";
+                        objectValue = "six";
                         break;
                     case 7:
-                        objectValue = "Seven";
+                        objectValue = "seven";
                         break;
                     case 8:
-                        objectValue = "Eight";
+                        objectValue = "eight";
                         break;
                     case 9:
-                        objectValue = "Nine";
+                        objectValue = "nine";
                         break;
                     case 10:
-                        objectValue = "Ten";
+                        objectValue = "ten";
                         break;
                     case 11:
-                        objectValue = "Jack";
+                        objectValue = "jack";
                         break;
                     case 12:
-                        objectValue = "Queen";
+                        objectValue = "queen";
                         break;
                     case 13:
-                        objectValue = "King";
+                        objectValue = "king";
                         break;
                     default:
                         objectValue = "error";
                 }
 
-                String objectName = objectSuit + objectValue;
+                String objectName = objectValue + objectSuit;
 
                 Card newCard = new Card (i, j, objectName);
                 deck.add(newCard);
@@ -95,7 +95,7 @@ public class Deck {
     void getDeck() {
 
         for(int i = 0; i < deck.size(); i++) {
-            System.out.print(deck.get(i).toString() + " ");
+            System.out.println(deck.get(i).toString() + " ");
         }
     }
 }
