@@ -1,10 +1,12 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Deck {
 
     private int suits;
     private int cardPerSuit;
 
+    Random rand = new Random();
     ArrayList<Card> deck = new ArrayList<>();
 
     //Constructs the deck
