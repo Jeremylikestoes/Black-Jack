@@ -18,7 +18,7 @@ public class Deck {
     //Makes the specific deck based on peramerters from the constructor
     void buildDeck() {
 
-        //Loop that creates each card; i = suits and j = values
+        //Loop that creates each card
         for (int i = 1; i <= suits; i++) {
 
             String objectSuit;
@@ -94,10 +94,25 @@ public class Deck {
         }
     }
 
+    //Lists the deck in order
     void getDeck() {
 
         for(int i = 0; i < deck.size(); i++) {
             System.out.println(deck.get(i).toString() + " ");
         }
+    }
+
+    void shuffleDeck() {
+        
+        for(int i = 0; i < deck.size() * 4; i++) {
+            int randomIndex = rand.nextInt(deck.size());
+            int swapIndex = rand.nextInt(deck.size());
+
+            Card randomCard = deck.get(randomIndex); 
+
+            deck.set(randomIndex, deck.get(swapIndex));
+            deck.set(swapIndex, randomCard);
+        }
+
     }
 }
