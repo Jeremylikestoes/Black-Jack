@@ -7,7 +7,10 @@ public class Deck {
     private int cardPerSuit;
 
     Random rand = new Random();
+    Player player = new Player();
+    Dealer dealer = new Dealer();
     ArrayList<Card> deck = new ArrayList<>();
+
 
     //Constructs the deck
     Deck(int deckSuits, int deckCPS) {
@@ -43,7 +46,7 @@ public class Deck {
 
                 String objectValue;
                 int objectPoints;
-                boolean aceHigh = false;
+                boolean aceHigh = true;
                 switch (j) {
                     case 1:
                         objectValue = "ace";
@@ -135,5 +138,15 @@ public class Deck {
             deck.set(swapIndex, randomCard);
         }
 
+    }
+
+    void dealCards() {
+        int topCard = deck.size() - 1;;
+        for(int i = 0; i < 2; i++) {
+           player.addCard(deck.get(topCard));
+           topCard--;
+           dealer.addCard(deck.get(topCard));
+           topCard--;
+        }
     }
 }

@@ -4,5 +4,6 @@ public class App {
         myDeck.buildDeck();
         myDeck.shuffleDeck();
         myDeck.getDeck();
+        myDeck.dealCards();
     }
 }
