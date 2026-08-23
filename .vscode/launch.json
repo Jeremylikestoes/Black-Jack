@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Game",
+            "request": "launch",
+            "mainClass": "Game",
+            "projectName": "Black-Jack_f2b865d"
+        },
+        {
+            "type": "java",
+            "name": "BlackjackGUI",
+            "request": "launch",
+            "mainClass": "BlackjackGUI",
+            "projectName": "Black-Jack_f2b865d"
+        },
+        {
+            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "App",

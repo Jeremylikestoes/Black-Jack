@@ -141,12 +141,12 @@ public class Deck {
     }
 
     void dealCards() {
-        int topCard = deck.size() - 1;;
         for(int i = 0; i < 2; i++) {
-           player.addCard(deck.get(topCard));
-           topCard--;
-           dealer.addCard(deck.get(topCard));
-           topCard--;
+           player.addCard(deck.remove(deck.size() - 1));
+           dealer.addCard(deck.remove(deck.size() - 1));
         }
+
+        System.out.println("Player:" + player.getHand());
+           System.out.println("Dealer :" + dealer.getHand());
     }
 }
