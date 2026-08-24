@@ -7,8 +7,8 @@ public class Deck {
     private int cardPerSuit;
 
     Random rand = new Random();
-    Player player = new Player();
-    Dealer dealer = new Dealer();
+    
+    
     ArrayList<Card> deck = new ArrayList<>();
 
 
@@ -27,16 +27,16 @@ public class Deck {
             String objectSuit;
             switch (i) {
                 case 1:
-                    objectSuit = "_clubs";
+                    objectSuit = " ♣";
                     break;
                 case 2:
-                    objectSuit = "_spades";
+                    objectSuit = " ♠";
                     break;
                 case 3:
-                    objectSuit = "_hearts";
+                    objectSuit = " ♥";
                     break;
                 case 4:
-                    objectSuit = "_diamonds";
+                    objectSuit = " ♦";
                     break;
                 default:
                     objectSuit = "error";
@@ -49,7 +49,7 @@ public class Deck {
                 boolean aceHigh = true;
                 switch (j) {
                     case 1:
-                        objectValue = "ace";
+                        objectValue = "A";
                         if(aceHigh) {
                             objectPoints = 11;
                         } 
@@ -58,51 +58,51 @@ public class Deck {
                         }
                         break;
                     case 2:
-                        objectValue = "two";
+                        objectValue = "2";
                         objectPoints = 2;
                         break;
                     case 3:
-                        objectValue = "three";
+                        objectValue = "3";
                         objectPoints = 3;
                         break;
                     case 4:
-                        objectValue = "four";
+                        objectValue = "4";
                         objectPoints = 4;
                         break;
                     case 5:
-                        objectValue = "five";
+                        objectValue = "5";
                         objectPoints = 5;
                         break;
                     case 6:
-                        objectValue = "six";
+                        objectValue = "6";
                         objectPoints = 6;
                         break;
                     case 7:
-                        objectValue = "seven";
+                        objectValue = "7";
                         objectPoints = 7;
                         break;
                     case 8:
-                        objectValue = "eight";
+                        objectValue = "8";
                         objectPoints = 8;
                         break;
                     case 9:
-                        objectValue = "nine";
+                        objectValue = "9";
                         objectPoints = 9;
                         break;
                     case 10:
-                        objectValue = "ten";
+                        objectValue = "10";
                         objectPoints = 10;
                         break;
                     case 11:
-                        objectValue = "jack";
+                        objectValue = "J";
                         objectPoints = 10;
                         break;
                     case 12:
-                        objectValue = "queen";
+                        objectValue = "Q";
                         objectPoints = 10;
                         break;
                     case 13:
-                        objectValue = "king";
+                        objectValue = "K";
                         objectPoints = 10;
                         break;
                     default:
@@ -140,13 +140,13 @@ public class Deck {
 
     }
 
-    void dealCards() {
+    void dealCards(Player dealPlayer, Dealer dealDealer) {
         for(int i = 0; i < 2; i++) {
-           player.addCard(deck.remove(deck.size() - 1));
-           dealer.addCard(deck.remove(deck.size() - 1));
+           dealPlayer.addCard(deck.remove(deck.size() - 1));
+           dealDealer.addCard(deck.remove(deck.size() - 1));
         }
 
-        System.out.println("Player:" + player.getHand());
-           System.out.println("Dealer :" + dealer.getHand());
+        System.out.println("Player:" + dealPlayer.getHand());
+           System.out.println("Dealer :" + dealDealer.getHand());
     }
 }
