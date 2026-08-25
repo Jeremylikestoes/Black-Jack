@@ -12,19 +12,20 @@ public class Deck {
     ArrayList<Card> deck = new ArrayList<>();
 
 
-    //Constructs the deck
     Deck(int deckSuits, int deckCPS) {
         suits = deckSuits;
         cardPerSuit = deckCPS;
     }
 
-    //Makes the specific deck based on peramerters from the constructor
+    
     void buildDeck() {
 
-        //Loop that creates each card
+        // -------Card-Creator-Loop-------
         for (int i = 1; i <= suits; i++) {
 
             String objectSuit;
+
+            // ---------Suit-Picker-------
             switch (i) {
                 case 1:
                     objectSuit = " ♣";
@@ -47,6 +48,8 @@ public class Deck {
                 String objectValue;
                 int objectPoints;
                 boolean aceHigh = true;
+
+                // -------Value-Picker-------
                 switch (j) {
                     case 1:
                         objectValue = "A";
@@ -118,7 +121,6 @@ public class Deck {
         }
     }
 
-    //Lists the deck in order
     void getDeck() {
 
         for(int i = 0; i < deck.size(); i++) {
@@ -145,8 +147,5 @@ public class Deck {
            dealPlayer.addCard(deck.remove(deck.size() - 1));
            dealDealer.addCard(deck.remove(deck.size() - 1));
         }
-
-        System.out.println("Player:" + dealPlayer.getHand());
-           System.out.println("Dealer :" + dealDealer.getHand());
     }
 }

@@ -54,7 +54,6 @@ public class BlackjackGUI {
             JLabel cardBack = new JLabel("<html><div style='text-align: center;'>Jeremy's<br>Casino</div></html>");
             JLabel card = new JLabel(dealer.getHand().get(i).toString());
             JPanel cardPanel = new JPanel();
-            
 
             if(i == 1) {
                 if(randomColor == 1) {
@@ -63,6 +62,8 @@ public class BlackjackGUI {
                 else {
                     cardPanel.setBackground(red);
                 }
+
+                // -------Card-Back-Formating-------
                 cardBack.setFont(new Font("Garamond", Font.BOLD, 18));
                 cardBack.setForeground(cream);
                 cardBack.setHorizontalAlignment(JLabel.CENTER);
@@ -74,6 +75,10 @@ public class BlackjackGUI {
             else {
                 
                 card.setFont(new Font("Tahoma", Font.BOLD, 30));
+                card.setHorizontalAlignment(JLabel.CENTER);
+                card.setVerticalAlignment(JLabel.CENTER);
+                cardPanel.setLayout(new BorderLayout());
+                cardPanel.add(card, BorderLayout.CENTER);
                 cardPanel.add(card);
             }
             cardPanel.setPreferredSize(new Dimension(100, 140));
@@ -91,6 +96,10 @@ public class BlackjackGUI {
             cardPanel.setPreferredSize(new Dimension(100, 140));
             card.setFont(new Font("Tahoma", Font.BOLD, 30));
             cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+            card.setHorizontalAlignment(JLabel.CENTER);
+            card.setVerticalAlignment(JLabel.CENTER);
+            cardPanel.setLayout(new BorderLayout());
+            cardPanel.add(card, BorderLayout.CENTER);
 
             playerCardPanel.add(cardPanel);
             cardPanel.add(card);
