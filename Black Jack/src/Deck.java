@@ -148,4 +148,8 @@ public class Deck {
            dealDealer.addCard(deck.remove(deck.size() - 1));
         }
     }
+
+    void hit(Player hitPlayer) {
+        hitPlayer.addCard(deck.remove(deck.size() - 1));
+    }
 }

@@ -23,11 +23,39 @@ public class BlackjackGUI {
     Random random = new Random();
     Player player;
     Dealer dealer;
+    Deck deck;
+    JPanel playerCardPanel;
+    
+    void updatePlayerCards() {
 
-    BlackjackGUI(Player guiPlayer, Dealer guiDealer) {
+        playerCardPanel.removeAll();
+        // -------Player-Card-Loop-------
+        for(int i = 0; i < player.getHand().size(); i++) {
+
+            JLabel card = new JLabel(player.getHand().get(i).toString());
+            JPanel cardPanel = new JPanel();
+
+            playerCardPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+            cardPanel.setPreferredSize(new Dimension(100, 140));
+            card.setFont(new Font("Tahoma", Font.BOLD, 30));
+            cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+            card.setHorizontalAlignment(JLabel.CENTER);
+            card.setVerticalAlignment(JLabel.CENTER);
+            cardPanel.setLayout(new BorderLayout());
+            cardPanel.add(card, BorderLayout.CENTER);
+
+            playerCardPanel.add(cardPanel);
+
+            playerCardPanel.revalidate();
+            playerCardPanel.repaint();
+        }
+    }
+
+    BlackjackGUI(Player guiPlayer, Dealer guiDealer, Deck guiDeck) {
 
         player = guiPlayer;
         dealer = guiDealer;
+        deck = guiDeck;
 
         // -------Main-Panel-Setup---------
         JFrame window = new JFrame("Blackjack");
@@ -36,6 +64,12 @@ public class BlackjackGUI {
         JLabel title = new JLabel("Black  Jack");
         JPanel tablePanel = new JPanel();
         tablePanel.setLayout(null );
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(null );
+
+        // -------Button-Setup-------
+        JButton hitButton = new JButton("Hit");
+        JButton standButton = new JButton("Stand");
 
         // -------Back-Card-Visuals-------
         JLabel spade = new JLabel("♠");
@@ -44,7 +78,7 @@ public class BlackjackGUI {
         JLabel diamond = new JLabel("♦");
  
         JPanel dealerCardPanel = new JPanel();
-        JPanel playerCardPanel = new JPanel();
+        playerCardPanel = new JPanel();
 
         int randomColor = random.nextInt(2);
 
@@ -64,7 +98,7 @@ public class BlackjackGUI {
                 }
 
                 // -------Card-Back-Formating-------
-                cardBack.setFont(new Font("Garamond", Font.BOLD, 18));
+                cardBack.setFont(new Font("Georgia", Font.BOLD, 18));
                 cardBack.setForeground(cream);
                 cardBack.setHorizontalAlignment(JLabel.CENTER);
                 cardBack.setVerticalAlignment(JLabel.CENTER);
@@ -93,6 +127,7 @@ public class BlackjackGUI {
             JLabel card = new JLabel(player.getHand().get(i).toString());
             JPanel cardPanel = new JPanel();
 
+            playerCardPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
             cardPanel.setPreferredSize(new Dimension(100, 140));
             card.setFont(new Font("Tahoma", Font.BOLD, 30));
             cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
@@ -102,14 +137,20 @@ public class BlackjackGUI {
             cardPanel.add(card, BorderLayout.CENTER);
 
             playerCardPanel.add(cardPanel);
-            cardPanel.add(card);
         }
+
+        
         
         // -------GUI-Formating-------
         mainPanel.setBackground(walnut);
         tablePanel.setBackground(tableGreen);
         dealerCardPanel.setOpaque(false);
         playerCardPanel.setOpaque(false);
+        buttonPanel.setOpaque(false);
+        hitButton.setBackground(walnut);
+        standButton.setBackground(walnut);
+        hitButton.setForeground(cream);
+        standButton.setForeground(cream);
 
         title.setBounds(380, 20, 200, 50);
         title.setFont(new Font("Georgia", Font.BOLD, 32));
@@ -124,9 +165,29 @@ public class BlackjackGUI {
         playerCardPanel.setBounds(155, 340, 550, 165);
         playerCardPanel.setBorder(BorderFactory.createLineBorder(beige, 3));
 
+        buttonPanel.setBounds(190, 600, 600, 150);
+        hitButton.setBounds(80, 40, 175, 75);
+        hitButton.setFont(new Font("Georgia", Font.BOLD, 18));
+        hitButton.setFocusPainted(false);
+        standButton.setBounds(350, 40,175, 75);
+        standButton.setFont(new Font("Georgia", Font.BOLD, 18));
+        standButton.setFocusPainted(false);
+
+        hitButton.addActionListener(e -> {
+            deck.hit(player);
+            updatePlayerCards();
+        });
+        standButton.addActionListener(e -> {
+            System.out.println("STAND!");
+        });
+
         tablePanel.add(dealerCardPanel);
         tablePanel.add(playerCardPanel);
+        buttonPanel.add(hitButton);
+        buttonPanel.add(standButton);
+        mainPanel.add(buttonPanel);
         mainPanel.add(tablePanel);
+        
         mainPanel.add(title);
         window.add(mainPanel);
 
@@ -137,4 +198,6 @@ public class BlackjackGUI {
         window.setVisible(true);
 
     }
+
+    
 }

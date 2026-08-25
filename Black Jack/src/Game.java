@@ -11,6 +11,6 @@ public class Game {
 
         myDeck.dealCards(player, dealer);
 
-        BlackjackGUI GUI = new BlackjackGUI(player, dealer);
+        BlackjackGUI GUI = new BlackjackGUI(player, dealer, myDeck);
     }
 }
