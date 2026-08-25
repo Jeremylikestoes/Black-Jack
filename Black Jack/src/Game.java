@@ -4,8 +4,6 @@ public class Game {
         Player player = new Player();
         Dealer dealer = new Dealer();
 
-        
-
         Deck myDeck = new Deck(4, 13);
 
         myDeck.buildDeck();
@@ -14,7 +12,7 @@ public class Game {
         myDeck.dealCards(player, dealer);
 
         BlackjackGUI GUI = new BlackjackGUI(player, dealer);
-        
+
         myDeck.getDeck();
     }
 }
