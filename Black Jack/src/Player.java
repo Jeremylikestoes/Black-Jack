@@ -2,6 +2,8 @@ import java.util.ArrayList;
 
 public class Player {
 
+    private int points;
+
     private ArrayList<Card> hand = new ArrayList<>();
 
 
@@ -11,5 +13,24 @@ public class Player {
 
     public void addCard(Card card) {
         hand.add(card);
+    }
+
+    public int totalPoints() {
+
+        points = 0;
+
+        for(int i = 0; i < hand.size(); i++) {
+            points = points + hand.get(i).getPoints();
+        }
+        
+        if(points > 22) {
+            for(int i = 0; i < hand.size(); i++) {
+                if(hand.get(i).getPoints() == 11) {
+                    points = points - 10;
+                }
+            }
+        }
+        System.out.println(points);
+        return points;
     }
 }

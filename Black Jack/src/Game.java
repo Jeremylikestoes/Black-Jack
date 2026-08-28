@@ -9,6 +9,7 @@ public class Game {
         myDeck.buildDeck();
         myDeck.shuffleDeck();
 
+
         myDeck.dealCards(player, dealer);
 
         BlackjackGUI GUI = new BlackjackGUI(player, dealer, myDeck);

@@ -47,18 +47,12 @@ public class Deck {
 
                 String objectValue;
                 int objectPoints;
-                boolean aceHigh = true;
 
                 // -------Value-Picker-------
                 switch (j) {
                     case 1:
                         objectValue = "A";
-                        if(aceHigh) {
-                            objectPoints = 11;
-                        } 
-                        else {
-                            objectPoints = 1;
-                        }
+                        objectPoints = 11;
                         break;
                     case 2:
                         objectValue = "2";

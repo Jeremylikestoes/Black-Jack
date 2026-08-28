@@ -174,8 +174,17 @@ public class BlackjackGUI {
         standButton.setFocusPainted(false);
 
         hitButton.addActionListener(e -> {
-            deck.hit(player);
-            updatePlayerCards();
+            if(player.totalPoints() < 21) {
+                deck.hit(player);
+                updatePlayerCards();
+            }
+            else if(player.totalPoints() == 21) {
+                System.out.println("Black Jack");
+            }
+            else {
+                System.out.println("Busted");
+            }
+            
         });
         standButton.addActionListener(e -> {
             System.out.println("STAND!");

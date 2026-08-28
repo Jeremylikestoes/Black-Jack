@@ -28,6 +28,10 @@ public class Card {
         return name;
     }
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
     @Override
     public String toString() {
         return name;
