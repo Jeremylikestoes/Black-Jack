@@ -124,7 +124,7 @@ public class Deck {
 
     void shuffleDeck() {
         
-        for(int i = 0; i < deck.size() * 4; i++) {
+        for(int i = 0; i < deck.size() * 50; i++) {
             int randomIndex = rand.nextInt(deck.size());
             int swapIndex = rand.nextInt(deck.size());
 
@@ -145,5 +145,9 @@ public class Deck {
 
     void hit(Player hitPlayer) {
         hitPlayer.addCard(deck.remove(deck.size() - 1));
+    }
+
+    void hit(Dealer hitDealer) {
+        hitDealer.addCard(deck.remove(deck.size() - 1));
     }
 }

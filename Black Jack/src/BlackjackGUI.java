@@ -19,12 +19,19 @@ public class BlackjackGUI {
     Color cream = new Color(243, 231, 207);
     Color red = new Color(128, 24, 32);
     Color navy = new Color(25, 45, 85);
+    
 
     Random random = new Random();
     Player player;
     Dealer dealer;
     Deck deck;
     JPanel playerCardPanel;
+    JPanel dealerCardPanel;
+
+    boolean dealerStand = false;
+    boolean roundEnd = false;
+    boolean dealerCardHidden = true;
+    int randomColor = random.nextInt(2);
     
     void updatePlayerCards() {
 
@@ -46,9 +53,61 @@ public class BlackjackGUI {
 
             playerCardPanel.add(cardPanel);
 
-            playerCardPanel.revalidate();
-            playerCardPanel.repaint();
         }
+        playerCardPanel.revalidate();
+        playerCardPanel.repaint();
+    }
+
+    void updateDealerCards() {
+
+        dealerCardPanel.removeAll();
+        // -------Dealer-Card-Loop-------
+        for(int i = 0; i < dealer.getHand().size(); i++) {
+
+            JLabel cardBack = new JLabel("<html><div style='text-align: center;'>Jeremy's<br>Casino</div></html>");
+            JLabel card = new JLabel(dealer.getHand().get(i).toString());
+            JPanel cardPanel = new JPanel();
+
+            if(i == 1 && dealerCardHidden) {
+                if(randomColor == 1) {
+                    cardPanel.setBackground(navy);
+                }
+
+                // -------Card-Back-Formating-------
+                cardBack.setFont(new Font("Georgia", Font.BOLD, 18));
+                cardBack.setForeground(cream);
+                cardBack.setHorizontalAlignment(JLabel.CENTER);
+                cardBack.setVerticalAlignment(JLabel.CENTER);
+                cardPanel.setLayout(new BorderLayout());
+                cardPanel.add(cardBack, BorderLayout.CENTER);
+            }
+            else {
+                
+                card.setFont(new Font("Tahoma", Font.BOLD, 30));
+                card.setHorizontalAlignment(JLabel.CENTER);
+                card.setVerticalAlignment(JLabel.CENTER);
+                cardPanel.setLayout(new BorderLayout());
+                cardPanel.add(card, BorderLayout.CENTER);
+            }
+            cardPanel.setPreferredSize(new Dimension(100, 140));
+            cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+
+            dealerCardPanel.add(cardPanel);
+            
+        }
+        dealerCardPanel.revalidate();
+        dealerCardPanel.repaint();
+    }
+
+    void dealerTurn() {
+        dealerCardHidden = false;
+
+        while(dealer.totalPoints() < 17) {
+
+            deck.hit(dealer);
+            updateDealerCards();
+        }
+        updateDealerCards();
     }
 
     BlackjackGUI(Player guiPlayer, Dealer guiDealer, Deck guiDeck) {
@@ -77,10 +136,8 @@ public class BlackjackGUI {
         JLabel club = new JLabel("♣");
         JLabel diamond = new JLabel("♦");
  
-        JPanel dealerCardPanel = new JPanel();
+        dealerCardPanel = new JPanel();
         playerCardPanel = new JPanel();
-
-        int randomColor = random.nextInt(2);
 
         // -------Dealer-Card-Loop-------
         for(int i = 0; i < dealer.getHand().size(); i++) {
@@ -104,7 +161,6 @@ public class BlackjackGUI {
                 cardBack.setVerticalAlignment(JLabel.CENTER);
                 cardPanel.setLayout(new BorderLayout());
                 cardPanel.add(cardBack, BorderLayout.CENTER);
-                cardPanel.add(cardBack);
             }
             else {
                 
@@ -113,7 +169,6 @@ public class BlackjackGUI {
                 card.setVerticalAlignment(JLabel.CENTER);
                 cardPanel.setLayout(new BorderLayout());
                 cardPanel.add(card, BorderLayout.CENTER);
-                cardPanel.add(card);
             }
             cardPanel.setPreferredSize(new Dimension(100, 140));
             cardPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
@@ -179,15 +234,19 @@ public class BlackjackGUI {
                 updatePlayerCards();
             }
             else if(player.totalPoints() == 21) {
-                System.out.println("Black Jack");
+                System.out.println("Win");
+                dealerTurn(); 
             }
             else {
                 System.out.println("Busted");
+                dealerTurn();
             }
             
         });
+
         standButton.addActionListener(e -> {
-            System.out.println("STAND!");
+            System.out.println("Stand");
+            dealerTurn();
         });
 
         tablePanel.add(dealerCardPanel);
