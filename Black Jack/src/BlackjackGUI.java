@@ -28,8 +28,7 @@ public class BlackjackGUI {
     JPanel playerCardPanel;
     JPanel dealerCardPanel;
 
-    boolean dealerStand = false;
-    boolean roundEnd = false;
+    boolean playerTurn = true;
     boolean dealerCardHidden = true;
     int randomColor = random.nextInt(2);
     
@@ -99,10 +98,11 @@ public class BlackjackGUI {
         dealerCardPanel.repaint();
     }
 
+    //-------Dealer-Turn-Logic-------
     void dealerTurn() {
         dealerCardHidden = false;
 
-        while(dealer.totalPoints() < 17) {
+        while(dealer.totalPoints() < 17 || (dealer.isSoft() == true && dealer.totalPoints() == 17)) {
 
             deck.hit(dealer);
             updateDealerCards();
@@ -131,10 +131,10 @@ public class BlackjackGUI {
         JButton standButton = new JButton("Stand");
 
         // -------Back-Card-Visuals-------
-        JLabel spade = new JLabel("♠");
-        JLabel heart = new JLabel("♥");
-        JLabel club = new JLabel("♣");
-        JLabel diamond = new JLabel("♦");
+        // JLabel spade = new JLabel("♠");
+        // JLabel heart = new JLabel("♥");
+        // JLabel club = new JLabel("♣");
+        // JLabel diamond = new JLabel("♦");
  
         dealerCardPanel = new JPanel();
         playerCardPanel = new JPanel();
@@ -182,6 +182,7 @@ public class BlackjackGUI {
             JLabel card = new JLabel(player.getHand().get(i).toString());
             JPanel cardPanel = new JPanel();
 
+
             playerCardPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
             cardPanel.setPreferredSize(new Dimension(100, 140));
             card.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -228,26 +229,30 @@ public class BlackjackGUI {
         standButton.setFont(new Font("Georgia", Font.BOLD, 18));
         standButton.setFocusPainted(false);
 
-        hitButton.addActionListener(e -> {
-            if(player.totalPoints() < 21) {
-                deck.hit(player);
-                updatePlayerCards();
-            }
-            else if(player.totalPoints() == 21) {
-                System.out.println("Win");
-                dealerTurn(); 
-            }
-            else {
-                System.out.println("Busted");
-                dealerTurn();
-            }
+            hitButton.addActionListener(e -> {
+                if(player.totalPoints() < 21 && playerTurn == true) {
+                    deck.hit(player);
+                    updatePlayerCards();
+                }
+                else if(player.totalPoints() == 21) {
+                    System.out.println("Win");
+                    dealerTurn(); 
+                    playerTurn = false;
+                }
+                else {
+                    System.out.println("Busted");
+                    dealerTurn();
+                    playerTurn = false;
+                }
             
-        });
+            });
 
-        standButton.addActionListener(e -> {
-            System.out.println("Stand");
-            dealerTurn();
-        });
+            standButton.addActionListener(e -> {
+                System.out.println("Stand");
+                dealerTurn();
+                playerTurn = false;
+            });
+        
 
         tablePanel.add(dealerCardPanel);
         tablePanel.add(playerCardPanel);
