@@ -29,6 +29,8 @@ public class BlackjackGUI {
     JPanel dealerCardPanel;
 
     boolean playerTurn = true;
+    boolean playerWin;
+    boolean push;
     boolean dealerCardHidden = true;
     int randomColor = random.nextInt(2);
     
@@ -108,6 +110,34 @@ public class BlackjackGUI {
             updateDealerCards();
         }
         updateDealerCards();
+    }
+
+    //-------Win-Determination-------
+    void determineWinner() {
+        if(dealer.totalPoints() > 21) {
+            if(player.totalPoints() > 21) {
+                push = true;
+            }
+            else {
+                playerWin = true;
+            }
+        }
+        else {
+            if(player.totalPoints() > 21) {
+                playerWin = false;
+            }
+            else {
+                if(dealer.totalPoints() > player.totalPoints()) {
+                    playerWin = false;
+                }
+                else if(dealer.totalPoints() == player.totalPoints()) {
+                    push = true;
+                }
+                else {
+                    playerWin = true;
+                }
+            }
+        }
     }
 
     BlackjackGUI(Player guiPlayer, Dealer guiDealer, Deck guiDeck) {
